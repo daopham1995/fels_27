@@ -6,7 +6,8 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user=User.new
+    redirect_to root_url if logged_in?
+    @user = User.new
   end
 
   def create
@@ -22,6 +23,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find params[:id]
+    @lessons = Lesson.where user_id: params[:id]
+    @learned_words = @user.lessons.map(&:words).flatten.uniq.count
   end
 
   def edit
