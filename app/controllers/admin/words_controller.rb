@@ -32,7 +32,7 @@ class Admin::WordsController < Admin::AdminController
   def destroy
     @word = Word.find params[:id]
     @word.destroy
-    flash[:success] = "User deleted"
+    flash[:success] = "Word deleted"
     redirect_to admin_words_url
   end
 
@@ -41,7 +41,3 @@ class Admin::WordsController < Admin::AdminController
     params.require(:word).permit :content, :category_id, answers_attributes: [:content, :correct]
   end
 end
-
-
-
-
