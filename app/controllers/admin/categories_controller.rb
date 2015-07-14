@@ -1,5 +1,6 @@
 class Admin::CategoriesController < Admin::AdminController
-  before_action :correct_supervisor,   only: [:edit, :update, :index, :show, :new]
+  before_action :correct_supervisor, only: [:edit, :update, :index, :show, :new]
+  
   def index
     @categories = Category.all
   end
@@ -15,7 +16,7 @@ class Admin::CategoriesController < Admin::AdminController
       redirect_to admin_categories_path
     else
       flash[:danger] = "Invalid category!"
-      render "new"
+      render :new
     end
   end
 
@@ -29,7 +30,7 @@ class Admin::CategoriesController < Admin::AdminController
       flash[:success]= "Category updated"
       redirect_to admin_categories_url
     else
-      render "edit"
+      render :edit
     end
   end
 
@@ -37,5 +38,4 @@ class Admin::CategoriesController < Admin::AdminController
   def category_params
     params.require(:category).permit :cat_name, :icon, :description
   end
-
 end
